@@ -1,3 +1,5 @@
+In the lab ‘Creating Virtual Machines’, you need to create different VM instances. You explore the instructions using only CLI commands. You create a non-preemptible VM instance; a VM to launch Windows; and a custom VM. You delete the VMs using the shell.
+
 
 <b>1. Create a virtual machine (VM)</b>
   <br>&nbsp;&nbsp;&nbsp;&nbsp;Create a VM
