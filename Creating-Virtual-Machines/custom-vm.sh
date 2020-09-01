@@ -1,4 +1,14 @@
 #!/bin/bash
+# Enter Project ID:
+echo Name:
+read PROJECT-ID
+echo PROJECT-ID=$PROJECT-ID
+
+# Enter Service account ID:
+echo Address:
+read SERVICE-ACCOUNT
+echo SERVICE-ACCOUNT=$SERVICE-ACCOUNT
+
 # Enter VM name:
 echo Name:
 read VM-NAME
@@ -19,12 +29,22 @@ echo Machine type:
 read MACHINE TYPE
 echo MACHINE TYPE=$MACHINE TYPE
 
-# Custom CPU type:
-echo Custom CPU:
-read CPU
-echo CUSTOM-CPU=$CUSTOM-CPU
+# Enter Machine type:
+echo Boot disk:
+read IMAGE
+echo IMAGE=$IMAGE
 
-# Custom memory type:
-echo Custom memory:
-read CUSTOM-MEM
-echo CUSTOM-MEM=$CUSTOM-MEM
+# Enter Operating System:
+echo Operating System:
+read IMAGE-PROJECT
+echo IMAGE-PROJECT=$IMAGE-PROJECT
+
+# Enter Boot disk size:
+echo Boot disk size:
+read BOOT-DISK-SIZE
+echo BOOT-DISK-SIZE=$BOOT-DISK-SIZE
+
+# Enter Boot disk type:
+echo Boot disk size:
+read BOOT-DISK-TYPE
+echo BOOT-DISK-TYPE=$BOOT-DISK-TYPE

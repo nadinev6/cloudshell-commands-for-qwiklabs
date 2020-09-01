@@ -1,4 +1,14 @@
 #!/bin/bash
+# Enter Project ID:
+echo Name:
+read PROJECT-ID
+echo PROJECT-ID=$PROJECT-ID
+
+# Enter Service account ID:
+echo Address:
+read SERVICE-ACCOUNT
+echo SERVICE-ACCOUNT=$SERVICE-ACCOUNT
+
 # Enter VM name:
 echo Name:
 read VM-NAME
@@ -24,11 +34,6 @@ echo Boot disk:
 read IMAGE
 echo IMAGE=$IMAGE
 
-# Enter Machine type:
-echo Boot disk:
-read IMAGE
-echo IMAGE=$IMAGE
-
 # Enter Operating System:
 echo Operating System:
 read IMAGE-PROJECT
@@ -47,4 +52,9 @@ echo BOOT-DISK-TYPE=$BOOT-DISK-TYPE
 # Allow Firewall rules:
 echo Enter tags:
 read TAGS
-echo TAGES=$TAGS
+echo TAGES=$TAG1
+
+# Allow Firewall rules:
+echo Enter tags:
+read TAGS
+echo TAGES=$TAG2
