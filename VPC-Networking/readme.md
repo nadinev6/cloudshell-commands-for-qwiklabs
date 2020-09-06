@@ -1,6 +1,6 @@
 # VPC Networking 
 
-##Table of Contents
+Table of Contents
 * [Introduction](#Introduction)
 * [Prerequisites](#prerequisites)
   * [Install Cloud SDK](#install-cloud-sdk)
@@ -9,24 +9,24 @@
   * [GCP Project ID](#gcp-project-id)
 
 
-## Task 1: Explore the default network 
+* Task 1: Explore the default network 
 
-* [Create a new auto mode VPC network with subnets, routes, firewall rules](#Create a new auto mode VPC network with subnets, routes, firewall rules)
-  *[View the firewall rules](#View the firewall rules)
-  *[Delete the firewall rules](#Delete-the-firewall-rules)
-  *[Delete the default network](#Delete-the-default-network)
-  *[Try to create a VM instance](#try-to-create-a-VM-instance)
+* [Create a new auto mode VPC network with subnets, routes, firewall rules](#Create-a-new-auto-mode-VPC-network-with subnets-routes-firewall-rules)
+  * [View the firewall rules](#view-the-firewall-rules)
+  * [Delete the firewall rules](#Delete-the-firewall-rules)
+  * [Delete the default network](#Delete-the-default-network)
+  * [Try to create a VM instance](#try-to-create-a-VM-instance)
 
-##Task 2: Create an auto mode network 
+* Task 2: Create an auto mode network 
 
 * [Create an auto mode VPC network with firewall rules] (#create-an-auto-mode-vpc-network-with-firewall-rules)
-  *[Create a VM instance in the us-central1 region](#create-a-vm-instance-in-the-us-central1-region)
-  *[Create a VM instance in europe-west1](#create-a-vm-instance-in-europe-west1)
+  * [Create a VM instance in the us-central1 region](#create-a-vm-instance-in-the-us-central1-region)
+  * [Create a VM instance in europe-west1](#create-a-vm-instance-in-europe-west1)
 * [Verify connectivity for the VM instances] (#verify-connectivity-for-the-vm-instances)
 
 *Convert the auto mode network to a custom mode network
 
-## Task 3: Create 2 more VM instances 
+* Task 3: Create 2 more VM instances 
 
 * [Create the managementnet network] (#create-the-managementnet-network) 
 * [Create the privatenet network] (#create-the-privatenet-network)
@@ -34,16 +34,17 @@
 * [Create the firewall rules for privatenet](#create-the-firewall-rules-for-privatenet)
 
 Create two VM instances:
-*[Create the managementnet-us-vm instance](#Create the managementnet-us-vm instance)
-*[Create the privatenet-us-vm instance](#)
+* [Create the managementnet-us-vm instance](#Create the managementnet-us-vm instance)
+* [Create the privatenet-us-vm instance](#)
 
 
 
-## Task 4: Explore connectivity across networks
+* Task 4: Explore connectivity across networks
 
   * [Enter SSH](#enter-ssh)
-  *[Ping the external IP addresses](#ping-the-external-ip-addresses)
-  *[Ping the internal IP addresses](#ping-the-internal-ip-addresses)
+  * [Ping the external IP addresses](#ping-the-external-ip-addresses)
+  * [Ping the internal IP addresses](#ping-the-internal-ip-addresses)
+
 
 
 ## Introduction
@@ -71,9 +72,8 @@ gcloud auth login
 ## GCP Project ID
 Take note for confirm the GCP project ID assigned to you. From the cloud shell run the following to confirm the credentialed account 
 ```console
-49
 gcloud projects list
-50
+
 ```
 
 **Task 1: Explore the default network**
@@ -133,6 +133,7 @@ Press enter to continue:
 
 ##Try to create a VM instance
 Verify that you cannot create a VM instance without a VPC network, run:
+
 ```console
 gcloud compute instances create [INSTANCE_NAME]
 ```
@@ -168,19 +169,18 @@ gcloud compute firewall-rules create mynetwork-allow-ssh --project=[PROJECT-ID] 
 
 ##Create a VM instance in us-central1 region
 Create a VM instance in the us-central1 region. Selecting a region and zone determines the subnet and assigns the internal IP address from the subnet's IP address range.
-	4.	Property
-	5.	Value (type value or select option as specified)
-	6.	Name
-	7.	mynet-us-vm
-	8.	Region
-	9.	us-central1
-	10.	Zone
-	11.	us-central1-c
-	12.	Machine type
-	13.	n1-standard-1 (1 vCPU, 3.75 GB memory)
+
+	Name
+		mynet-us-vm
+	Region
+		us-central1
+	Zone
+		us-central1-c
+	Machine type
+		n1-standard-1 (1 vCPU, 3.75 GB memory)
 
 
-``console
+```console
 gcloud beta compute --project=[PROJECT-ID] instances create mynet-us-vm --zone=us-central1-c --machine-type=n1-standard-1 --subnet=default --network-tier=PREMIUM --maintenance-policy=MIGRATE --service-account=441967460138-compute@developer.gserviceaccount.com --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append --image=debian-9-stretch-v20200902 --image-project=debian-cloud --boot-disk-size=10GB --boot-disk-type=pd-standard --boot-disk-device-name=mynet-us-vm --reservation-affinity=any
 ```
 
@@ -193,16 +193,15 @@ mynet-us-vm  us-central1-c  n1-standard-1               10.128.0.2   34.123.171.
 
 Create a VM instance in europe-west1
 Specify the following, and leave the remaining settings as their defaults:
-	3.	Property
-	4.	Value (type value or select option as specified)
-	5.	Name
-	6.	mynet-eu-vm
-	7.	Region
-	8.	europe-west1
-	9.	Zone
-	10.	europe-west1-c
-	11.	Machine type
-	12.	n1-standard-1 (1 vCPU, 3.75 GB memory)
+
+	Name
+		mynet-eu-vm
+	Region
+		europe-west1
+	Zone
+		europe-west1-c
+	Machine type
+		n1-standard-1 (1 vCPU, 3.75 GB memory)
 
 
 ```console
@@ -293,17 +292,19 @@ ping -c 3 mynet-eu-vm
 
 5. To test connectivity to mynet-eu-vm's external IP, run the following command, replacing mynet-eu-vm's external IP:
 
-``console
+```console
 ping -c 3 <Enter mynet-eu-vm's external IP here>
 ```
 
 Convert the network to a custom mode network
 Exit out of the shell. Run:
+
 ```console
 exit
 ```
 
 The auto mode network worked great so far, but you have been asked to convert it to a custom mode network so that new subnets aren't automatically created as new regions become available. This could result in overlap with IP addresses used by manually created subnets or static routes, or could interfere with your overall network planning.
+
 ```console
 gcloud compute networks update mynetwork \
     --switch-to-custom-subnet-mode
@@ -311,14 +312,14 @@ gcloud compute networks update mynetwork \
 
 When prompted, type y and continue.
 Specify the following, and leave the remaining settings as their defaults:
-Property
-Value (type value or select option as specified)
-Name
-managementsubnet-us
-Region
-us-central1
-IP address range
-10.130.0.0/20
+
+
+Name:
+	managementsubnet-us
+Region:
+	us-central1
+IP address range:
+	10.130.0.0/20
 
 ## Task 3: Create 2 more custom mode VPC networks and firewall rules
 
@@ -610,11 +611,11 @@ To exit out of the shell environment type:
 exit```
 
 Enter the ssh terminal again for the managementnet-us-vm's: 
-``console
+```console
 gcloud compute ssh [USER]@qwiklabs.net@managementnet-us-vm
 ```
 	4.	3. To test connectivity to  managementnet-us-vm's  internal IP, run the following command, replacing managementnet-us-vm's  internal IP:
-``console
+```console
 ping -c 3 <Enter managementnet-us-vm's internal IP here>
 ```
 
@@ -625,12 +626,12 @@ To exit out of the shell environment type:
 ```console
 exit```
 Enter the ssh terminal again for the mynet-us-vm: 
-``console
+```console
 gcloud compute ssh [USER]@qwiklabs.net@managementnet-us-vm
 ```
 
 	4.	3. To test connectivity to privatenet-us-vm'ss internal IP, run the following command, replacing privatenet-us-vm's internal IP:
-``console
+```console
 ping -c 3 <Enter managementnet-us-vm's internal IP here>
 ```
 
