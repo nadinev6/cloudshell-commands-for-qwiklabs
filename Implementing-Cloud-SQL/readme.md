@@ -1,5 +1,5 @@
 # Creating Virtual Machines
-*Table of Contents
+Table of Contents
 * [Introduction](#Introduction)
 * [Prerequisites](#prerequisites)
   * [Install Cloud SDK](#install-cloud-sdk)
@@ -7,18 +7,18 @@
   * [Qwiklabs User](#qwiklabs-user)
   * [GCP Project ID](#gcp-project-id)
 
-* Create a virtual machine (VM)
-  * Create a VM
-  * Explore the VM details
-  * Examine availability policies
-  * Explore the VM logs
+* [Create a virtual machine)](*create-a-virtual-machine)
+  * [Create a VM](*create-a-vm)
+  * [Explore the VM details](*explore-the-vm-details)
+  * [Examine availability policies](*examine-availability-policies)
+  * [Explore the VM logs](*exxplore-the-vm-logs)
 
-* Create a Windows VM
-* Create a VM
-* Set the password for the VM
+* [Create a Windows VM](*create-a-windows-vm)
+  * [Create a VM](*create-a-vm)
+  * [Set the password for the VM](*set-the-password-for-the-vm)
 
-* Clean up
-  * Delete the VM
+* [Clean up](clean-up)
+  * [Delete the VM](*delete-the-vm)
 
 
 ### Introduction
@@ -27,32 +27,28 @@ VPC networking documentation and summary can be found here: https://cloud.google
 
 ### Prerequisites
 
-Use the credentials provided by Qwiklabs as well as the google cloud console or the google cloud SDK. 
+Use the credentials provided by Qwiklabs for the  cloud console or the google cloud SDK. 
 
 ### Install Cloud SDK
 
 For instructions on how to install the google cloud SDK visit google documentation: https://cloud.google.com/sdk/install. 
 
-###Configure authentication
+### Configure authentication
 
-###Qwiklabs User
+### Qwiklabs User
 
 Take note of the username provided by Qwiklabs and the user associated with the temporary Qwiklabs email assigned to this project.
 
 From the cloud shell run the following to confirm the credentialed account 
 
 ```console
-49
 gcloud list
-50
 ```
 
  From the cloud SDK run the following to login with the provided credentials:
 
 ```console
-49
 gcloud auth login
-50
 ```
 
 ### GCP Project ID
@@ -60,14 +56,12 @@ gcloud auth login
 Take note for confirm the GCP project ID assigned to you. From the cloud shell run the following to confirm the credentialed account 
 
 ```console
-49
 gcloud projects list
-50
 ```
 
-##	Create a virtual machine (VM)
+##	Create a virtual machine
 
-# Create a VM
+### Create a VM
 
 Run the following command to service accounts:
 
@@ -106,7 +100,7 @@ gcloud compute instances describe [$NAME]
 When prompted about a zone, type y only if the zone presents matches the zone you set, otherwise type n
 
 
-###Examine availability policies 
+### Examine availability policies 
 
 In the description scroll down to see the availability of your VM 
 
@@ -126,9 +120,9 @@ gcloud compute instances list
 ```
 
 
-##Create a Windows VM
+## Create a Windows VM
 
-###Create a VM
+### Create a VM
 
 ```console
 gcloud beta compute --project=qwiklabs-gcp-01-8c72720fba45 instances create win-vm --zone=europe-west2-a --machine-type=e2-small --subnet=default --network-tier=PREMIUM --maintenance-policy=MIGRATE --service-account=118959651289-compute@developer.gserviceaccount.com --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append --tags=http-server,https-server --image=windows-server-2016-dc-core-v20200813 --image-project=windows-cloud --boot-disk-size=100GB --boot-disk-type=pd-ssd --boot-disk-device-name=win-vm --no-shielded-secure-boot --shielded-vtpm --shielded-integrity-monitoring --reservation-affinity=any
