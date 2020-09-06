@@ -22,20 +22,20 @@ Table of Contents
 * [Create an auto mode VPC network with firewall rules] (#create-an-auto-mode-vpc-network-with-firewall-rules)
   * [Create a VM instance in the us-central1 region](#create-a-vm-instance-in-the-us-central1-region)
   * [Create a VM instance in europe-west1](#create-a-vm-instance-in-europe-west1)
-* [Verify connectivity for the VM instances] (#verify-connectivity-for-the-vm-instances)
+* [Verify connectivity for the VM instances](#verify-connectivity-for-the-vm-instances)
 
 *Convert the auto mode network to a custom mode network
 
 * Task 3: Create 2 more VM instances 
 
-* [Create the managementnet network] (#create-the-managementnet-network) 
+* [Create the managementnet network](#create-the-managementnet-network) 
 * [Create the privatenet network] (#create-the-privatenet-network)
 * [Create the firewall rules for managementnet](#create-the-firewall-rules-for-managementnet)
 * [Create the firewall rules for privatenet](#create-the-firewall-rules-for-privatenet)
 
 Create two VM instances:
-* [Create the managementnet-us-vm instance](#Create the managementnet-us-vm instance)
-* [Create the privatenet-us-vm instance](#)
+* [Create the managementnet-us-vm instance](#create-the-managementnet-us-vm-instance)
+* [Create the privatenet-us-vm instance](#vreate-the-privatenet-us-vm-instance)
 
 
 
@@ -57,20 +57,19 @@ For instructions on how to install the google cloud SDK visit google documentati
 ##Qwiklabs User
 Take note of the username provided by Qwiklabs and the user associated with the temporary Qwiklabs email assigned to this project.
 From the cloud shell run the following to confirm the credentialed account 
+
 ```console
-49
 gcloud list
-50
 ```
  From the cloud SDK run the following to login with the provided credentials:
+
 ```console
-49
 gcloud auth login
-50
 ```
 
 ## GCP Project ID
 Take note for confirm the GCP project ID assigned to you. From the cloud shell run the following to confirm the credentialed account 
+
 ```console
 gcloud projects list
 
@@ -142,6 +141,7 @@ As expected, you cannot create a VM instance without a VPC network!
 
 ##Task 2: Create an auto mode network
 ##Create an auto mode VPC network with firewall rules
+
 1. 
 ```console
 gcloud compute networks create mynetwork --project=[PROJECT-ID] subnet-mode=auto --bgp-routing-mode=regional
@@ -168,6 +168,7 @@ gcloud compute firewall-rules create mynetwork-allow-ssh --project=[PROJECT-ID] 
 ```
 
 ##Create a VM instance in us-central1 region
+
 Create a VM instance in the us-central1 region. Selecting a region and zone determines the subnet and assigns the internal IP address from the subnet's IP address range.
 
 	Name
@@ -282,8 +283,6 @@ student-02-04dc6aaa1069@mynet-eu-vm:~$
 ```
 
 
-
-
 4. Repeat the same test by running the following: 
 ```console
 ping -c 3 mynet-eu-vm
@@ -320,6 +319,7 @@ Region:
 	us-central1
 IP address range:
 	10.130.0.0/20
+	
 
 ## Task 3: Create 2 more custom mode VPC networks and firewall rules
 
@@ -338,12 +338,12 @@ managementsubnet-us  us-central1  managementnet  10.130.0.0/20
 ```
 
 ##Create the privatenet network
+
 1. To create the privatenet network, run the following command:
 
 ```console
 gcloud compute networks create privatenet --subnet-mode=custom
 ```
-
 
 2. To create the privatesubnet-us subnet, run the following command:
 ```console
@@ -360,6 +360,7 @@ gcloud compute networks list
 ```
 
 5. The output should look like this (do not copy; this is example output):
+
 ```console
 NAME           SUBNET_MODE  BGP_ROUTING_MODE  IPV4_RANGE  GATEWAY_IPV4
 managementnet  CUSTOM       REGIONAL
@@ -368,6 +369,7 @@ privatenet     CUSTOM       REGIONAL
 ```
 
 6. To list the available VPC subnets (sorted by VPC network), run the following command:
+
 ```console
 gcloud compute networks subnets list --sort-by=NETWORK
 ```
@@ -405,46 +407,49 @@ gcloud compute networks subnets list --sort-by=NETWORK
 ```
 
 ##Create the firewall rules for managementnet
-Create firewall rules to allow SSH, ICMP, and RDP ingress traffic to VM instances on the managementnet network.
 
-	1.	Specify the following, and leave the remaining settings as their defaults:
-	2.	Property
-	3.	Value (type value or select option as specified)
-	4.	Name
-	5.	managementnet-allow-icmp-ssh-rdp
-	6.	Network
-	7.	managementnet
-	8.	Targets
-	9.	All instances in the network
-	10.	Source filter
-	11.	IP Ranges
-	12.	Source IP ranges
-	13.	0.0.0.0/0
-	14.	Protocols and ports
-	15.	Specified protocols and ports
+Create firewall rules to allow SSH, ICMP, and RDP ingress traffic to VM instances on the managementnet network
+
+
+	Name:
+		managementnet-allow-icmp-ssh-rdp
+	Network:
+		managementnet
+	Targets:
+		All instances in the network
+	Source filter:
+		IP Ranges
+	Source IP ranges:
+		0.0.0.0/0
+	Protocols and ports:
+		Specified protocols and ports
 
 ```console
 gcloud compute --project=[PROJECT-ID] firewall-rules create managementnet-allow-icmp-ssh-rdp --direction=INGRESS --priority=1000 --network=managementnet --action=ALLOW --rules=tcp:22,tcp:3389,icmp --source-ranges=0.0.0.0/0
-
 ```
 
 ##Create the firewall rules for privatenet
 Create the firewall rules for privatenet network using the gcloud command line.
-1. To create the privatenet-allow-icmp-ssh-rdp firewall rule, run the following command: 
+1. To create the privatenet-allow-icmp-ssh-rdp firewall rule, run the following command:
+
 ```console
 gcloud compute firewall-rules create privatenet-allow-icmp-ssh-rdp --direction=INGRESS --priority=1000 --network=privatenet --action=ALLOW --rules=icmp,tcp:22,tcp:3389 --source-ranges=0.0.0.0/0
 ```
+
 Output: 
+
 ```console
 NAME                              NETWORK        DIRECTION  PRIORITY  ALLOW                 DENY  DISABLED
 managementnet-allow-icmp-ssh-rdp  managementnet  INGRESS    1000      tcp:22,tcp:3389,icmp        False
 ```
 
 2. To list all the firewall rules (sorted by VPC network), run the following command:
+
 ```console
 gcloud compute firewall-rules list --sort-by=NETWORK
 ```
 Output:
+
 ```console
 NAME                              NETWORK        DIRECTION  PRIORITY  ALLOW                        
 managementnet-allow-icmp-ssh-rdp  managementnet  INGRESS    1000      icmp,tcp:22,tcp:3389
@@ -465,34 +470,36 @@ The firewall rules for mynetwork network have been created. You can define mul
 ##Create the managementnet-us-vm instance
 
 	1.	Specify the following, and leave the remaining settings as their defaults:
-Property
-Value (type value or select option as specified)
-Name
-managementnet-us-vm
-Region
-us-central1
-Zone
-us-central1-c
-Machine type
-f1-micro (1 vCPU, 614 MB memory)
+
+Name:
+	managementnet-us-vm
+Region:
+	us-central1
+Zone:
+	us-central1-c
+Machine type:
+	f1-micro (1 vCPU, 614 MB memory)
+
 Specify the following, and leave the remaining settings as their defaults:
-Property
-Value (type value or select option as specified)
-Network
-managementnet
-Subnetwork
-managementsubnet-us
+
+Network:
+	managementnet
+Subnetwork:
+	managementsubnet-us
 
 ```console
 gcloud beta compute --project=[PROJECT-ID]  instances create managementnet-us-vm --zone=us-central1-c --machine-type=f1-micro --subnet=managementsubnet-us --network-tier=PREMIUM --maintenance-policy=MIGRATE --service-account=441967460138-compute@developer.gserviceaccount.com --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append --image=debian-9-stretch-v20200902 --image-project=debian-cloud --boot-disk-size=10GB --boot-disk-type=pd-standard --boot-disk-device-name=managementnet-us-vm --reservation-affinity=any
 ```
 
 ##Create the privatenet-us-vm instance
-1. To create the privatenet-us-vm instance, run the following command: 
+1. To create the privatenet-us-vm instance, run the following command:
+
 ```console
 gcloud compute instances create privatenet-us-vm --zone=us-central1-c --machine-type=f1-micro --subnet=privatesubnet-us
 ```
+
 Output:
+
 ```console
 Created [https://www.googleapis.com/compute/v1/projects/qwiklabs-gcp-00-c3c7336ff7b3/zones/us-central1-c/instances/privat
 enet-us-vm].
@@ -525,7 +532,6 @@ Run the following code:
 gcloud compute ssh [USER]@qwiklabs.net@mynet-eu-vm
 ```
 
-
 2. Type y and press to continue.
 
 Once you have verified the zone you used to create the VM instance, this is an example of the output:
@@ -542,9 +548,12 @@ Creating directory '/home/student-00-7cb7c3c22531'.
 student-00-7cb7c3c22531@managementnet-us-vm:~$
 ```
 
-##Ping the external IP addresses 
+##Ping the external IP addresses
+
 Ping the external IP addresses of the VM instances to determine whether you can reach the instances from the public internet
+
 1. run the following command, replacing mynet-eu-vm's external IP:
+
 ```console
 ping -c 3 <Enter mynet-eu-vm's external IP here>
 ```
@@ -569,7 +578,9 @@ rtt min/avg/max/mdev = 0.419/0.646/1.077/0.305 ms
 ```console
 ping -c 3 <Enter managementnet-us-vm's external IP here>
 ```
-3. To test connectivity to privatenet-us-vm's external IP, run the following command, replacing privatenet-us-vm's external IP: 
+
+3. To test connectivity to privatenet-us-vm's external IP, run the following command, replacing privatenet-us-vm's external IP:
+
 ```console
 ping -c 3 <Enter privatenet-us-vm's external IP here>
 ```
@@ -579,19 +590,26 @@ You can ping the external IP address of all VM instances, even though they are i
 
 ##Ping the internal IP addresses
 To exit out of the shell environment type:
+
 ```console
-exit```
+exit 
+```
+
 To list the available VPC networks, run the following command and note the internal IP addresses of the VM instances:
+
 ```console
 gcloud compute networks list
 ```
 
 Enter the ssh terminal again for the mynet-us-vm: 
+
 ```console
 gcloud compute ssh [USER]@qwiklabs.net@mynet-eu-vm
 ```
 
-1. To test connectivity to mynet-eu-vm's internal IP, run the following command, replacing mynet-eu-vm's internal IP: 
+1. To test connectivity to mynet-eu-vm's internal IP, run the following command, replacing mynet-eu-vm's internal IP:
+
+
 ```console
 ping -c 3 <Enter mynet-eu-vm's internal IP here>
 ```
@@ -599,8 +617,8 @@ ping -c 3 <Enter mynet-eu-vm's internal IP here>
 You can ping the internal IP address of mynet-eu-vm because it is on the same VPC network as the source of the ping (mynet-us-vm), even though both VM instances are in separate zones, regions, and continents!
 
 
-
 2. To test connectivity to managementnet-us-vm's internal IP, run the following command, replacing managementnet-us-vm's internal IP:
+
 ```console
 ping -c 3 <Enter managementnet-us-vm's internal IP here>
 ```
@@ -608,13 +626,17 @@ ping -c 3 <Enter managementnet-us-vm's internal IP here>
 To exit out of the shell environment type:
 
 ```console
-exit```
+exit
+```
 
 Enter the ssh terminal again for the managementnet-us-vm's: 
+
 ```console
 gcloud compute ssh [USER]@qwiklabs.net@managementnet-us-vm
+
 ```
-	4.	3. To test connectivity to  managementnet-us-vm's  internal IP, run the following command, replacing managementnet-us-vm's  internal IP:
+3. To test connectivity to  managementnet-us-vm's  internal IP, run the following command, replacing managementnet-us-vm's  internal IP:
+
 ```console
 ping -c 3 <Enter managementnet-us-vm's internal IP here>
 ```
@@ -623,14 +645,18 @@ This should not work, as indicated by a 100% packet loss!
 
 
 To exit out of the shell environment type:
+
 ```console
-exit```
+exit
+```
 Enter the ssh terminal again for the mynet-us-vm: 
+
 ```console
 gcloud compute ssh [USER]@qwiklabs.net@managementnet-us-vm
 ```
 
-	4.	3. To test connectivity to privatenet-us-vm'ss internal IP, run the following command, replacing privatenet-us-vm's internal IP:
+4. To test connectivity to privatenet-us-vm'ss internal IP, run the following command, replacing privatenet-us-vm's internal IP:
+
 ```console
 ping -c 3 <Enter managementnet-us-vm's internal IP here>
 ```
