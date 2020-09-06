@@ -23,7 +23,7 @@ Table of Contents
 
 ### Introduction
 
-VPC networking documentation and summary can be found here: https://cloud.google.com/vpc. The Qwiklabs covered in this tutorial is called ‘VPC Networking’. The instructions have been modified so that they can be completed using the cloud shell terminal only or using the google cloud SDK. 
+Virtual machines documentation and summary of how to use the services can be found here: https://cloud.google.com/compute. The Qwiklabs covered in this tutorial is called ‘Creating Virtual Machines’. The instructions have been modified so that they can be completed using the cloud shell terminal only or using the google cloud SDK. 
 
 #### Prerequisites
 
