@@ -88,8 +88,9 @@ Take note of the ‘Compute Engine default service account’ as you will need i
 
 Output:
 
+```console
 gcloud beta compute --project=qwiklabs-gcp-01-aa61206acec7 instances create vm-1 --zone=us-central1-a --machine-type=n1-standard-1 --subnet=default --no-address --maintenance-policy=MIGRATE --service-account=440157913927-compute@developer.gserviceaccount.com --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append --image=debian-9-stretch-v20200805 --image-project=debian-cloud --boot-disk-size=10GB --boot-disk-type=pd-standard --boot-disk-device-name=vm-1 —reservation-affinity=any
-
+```
 
 ### Explore the VM details
 
@@ -243,5 +244,5 @@ exit
 Run this command for each of your VMs:
 
 ```console
-gcloud compute instances delete [$NAME]
+gcloud compute instances delete [NAME]
 ```
