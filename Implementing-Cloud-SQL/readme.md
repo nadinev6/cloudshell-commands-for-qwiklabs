@@ -7,13 +7,13 @@
   * [Qwiklabs User](#qwiklabs-user)
   * [GCP Project ID](#gcp-project-id)
 
-* Task 1: Create a Cloud SQL database
+* [Task 1: Create a Cloud SQL database](*task-1-create-a-cloud-sql-database)
 
-* Task 2: Configure a proxy on a virtual machine
+* [Task 2: Configure a proxy on a virtual machine](*task-2-configure-a-proxy-on-a-virtual-machine)
   * [SSH to wordpress-europe-proxy](#ssh-to-wordpress-europe-proxy)
   * [Connect to your Cloud SQL instance](#connect-to-your-cloud-sql)
 
-* Task 3: Connect an application to the Cloud SQL instance
+* [Task 3: Connect an application to the Cloud SQL instance](*task-3-connect-an-application-to-the-cloud-sql-instance)
   * [Configure the Wordpress-application](#configure-the-wordpress-application)
 
 
