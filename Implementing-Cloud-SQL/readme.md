@@ -1,4 +1,4 @@
-# VPC Networking 
+# Implementing SQL
 
 * [Introduction](#Introduction)
 * [Prerequisites](#prerequisites)
@@ -7,19 +7,19 @@
   * [Qwiklabs User](#qwiklabs-user)
   * [GCP Project ID](#gcp-project-id)
 
-## Task 1: Create a Cloud SQL database
+* Task 1: Create a Cloud SQL database
 
-## Task 2: Configure a proxy on a virtual machine
+* Task 2: Configure a proxy on a virtual machine
   * [SSH to wordpress-europe-proxy](#ssh-to-wordpress-europe-proxy)
   * [Connect to your Cloud SQL instance](#connect-to-your-cloud-sql)
 
-## Task 3: Connect an application to the Cloud SQL instance
-  *[Configure the Wordpress-application](#configure-the-wordpress-application)
+* Task 3: Connect an application to the Cloud SQL instance
+  * [Configure the Wordpress-application](#configure-the-wordpress-application)
 
 
 ### Introduction
 
-VPC networking documentation and summary can be found here: https://cloud.google.com/vpc. The Qwiklabs covered in this tutorial is called ‘VPC Networking’. The instructions have been modified so that they can be completed using the cloud shell terminal only or using the google cloud SDK. 
+Cloud SQL documentation and summary can be found here: https://cloud.google.com/sql/docs. The Qwiklabs covered in this tutorial is called ‘Implementing SQL'. The instructions have been modified so that they can be completed using the cloud shell terminal only or using the google cloud SDK. 
 
 #### Prerequisites
 
