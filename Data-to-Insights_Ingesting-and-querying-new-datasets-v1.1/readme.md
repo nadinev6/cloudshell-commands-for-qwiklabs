@@ -7,7 +7,7 @@
 * [Configure Authentication](#configure-authentication)
   * [Qwiklabs User](#qwiklabs-user)
   * [GCP Project ID](#gcp-project-id)
-
+* [Clone this git-repository](#clone-this-git-repository)
 
 ## Ingesting Data from Google Cloud Storage
 
@@ -19,7 +19,7 @@
 
 ## Ingesting a CSV into a Google BigQuery Table 
 
-* [Open BigQuery] (#open-bigquery)
+* [Open BigQuery](#open-bigquery)
 * [Create a dataset](*create-a-dataset)
 * [Upload the dataset](*upload-the-dataset)
 * [Create table](*create-table)
@@ -34,7 +34,7 @@
 
 ## Introduction
 
-The task allows you to ingest data into BigQuery from different sources, including this repository.  Documentation and summary about Google BigQuery can be found here: https://cloud.google.com/bigquery/docs. The Qwiklabs covered in this tutorial is called ‘Data to Insights: Ingesting and Querying New Dataset v1.1’. The instructions have been modified so that they can be completed using the cloud shell terminal only or using the google cloud SDK and BigQuery (bq) component. 
+The task allows you to ingest data into BigQuery from different sources, including this repository.  Documentation and summary about Google BigQuery can be found here: https://cloud.google.com/bigquery/docs. The Qwiklabs covered in this tutorial is called ‘Data to Insights: Ingesting and Querying New Dataset v1.1’. The instructions have been modified so that they can be completed using the cloud shell terminal only or using the google cloud SDK and BigQuery (bq) component. The files needed to complete the lab are also included in this repository. You will need to clone this respository in order to copy the needed files without using the web console. 
 
 ## Prerequisites
 
@@ -70,7 +70,11 @@ Take note for confirm the GCP project ID assigned to you. From the cloud shell r
 gcloud projects list
 ```
 
-In Cloud Shell session execute the following command to download sample data for this lab from this git repository:
+
+
+### Clone this git-repository
+
+In Cloud Shell session run the following command to use bash assistance:
 
 ```console
 git clone https://github.com/nadinev6/
@@ -79,8 +83,9 @@ git clone https://github.com/nadinev6/
 Change to the blogs directory:
 
 ```console
-cd cloudshell-commands-for-qwiklabs/data-to-insights
+cd cloudshell-commands-for-qwiklabs/Data-to-Insights_Ingesting-and-querying-new-datasets-v1.1
 ```
+
 
 ## Ingesting Data from Google Cloud Storage
 
@@ -88,27 +93,30 @@ cd cloudshell-commands-for-qwiklabs/data-to-insights
 
 ### Create a storage bucket
 
-Set the environment variable:
+Set the environment variables for your project ID and bucket name, or use the shortcut below:
+
 
 ```console
-PROJECT_ID=`gcloud config get-value project`
+projectID=`gcloud config get-value project`
 ```
 
 ```console
-BUCKET=${PROJECT_ID}-bucket
+bucket=${projectID}-bucket
 ```
+
+Shortcut:
+```console
+zsh set-var.sh
+```
+
+You should not see any output
 
 **Create a bucket**
 
 ```console
-gsutil mb -c multi_regional gs://${BUCKET}
+gsutil mb -c multi_regional gs://${bucket}
 ```
 
-To confirm that the dataset is in your bucket, run the following command:
-
-```console
-gsutil ls gs://${BUCKET}/*
-```
 
 
 ### Upload a dataset to Google Cloud Storage
@@ -116,11 +124,24 @@ gsutil ls gs://${BUCKET}/*
 
 **Upload the dataset to your bucket**
 
+
 Run the following to copy the NAICS_digit_2017_codes.csv object to your bucket:
 
 ```console
-gsutil -m cp -r endpointslambda gs://${BUCKET}
+gsutil -m cp -r NAICS_digit_2017_codes.csv gs://${bucket}
 ```
+
+To confirm that the dataset is in your bucket, run the following command:
+
+```console
+gsutil ls gs://${bucket}/*
+```
+(example) Output:
+
+```console
+gs://qwiklabs-gcp-03-68354171125c-bucket/NAICS_digit_2017_codes.csv
+```
+
 
 ## Ingesting a CSV into a Google BigQuery Table 
 
@@ -146,6 +167,9 @@ Run the following command to list the available datasets:
 bq ls bigquery-public-data:
 ```
 
+There are no datasets so you need to create one
+
+
 ### Create a dataset
 
 
@@ -154,7 +178,7 @@ Use the bq mk command to create a new dataset named irs_990 in your Qwiklabs
 ```console
 bq mk irs_990
 ```
-(Example) Output:
+(example) Output:
 
 ```console
 Dataset 'qwiklabs-gcp-ba3466847fe3cec0:irs_990 successfully created.
@@ -176,10 +200,9 @@ bq ls
 
 Before you can build the table, you need to add the dataset to your project
 
-Run this command to add the irs_990.csv to your project, using the URL for the data file:
 
 ```console
-wget https://github.com/nadinev6/cloudshell-commands-for-qwiklabs/irs_990.csv
+wget https://www.kaggle.com/irs/irs-990
 ```
 
 List the file:
@@ -188,10 +211,12 @@ List the file:
 ls
 ```
 
-Unzip the file:
+If the file is in csv format, ignore the next steps
+
+If the file is zipped then unnzip the file:
 
 ```console
-Unzip irs_990.zip
+unzip irs_990.zip
 ```
 
 List the file again:
@@ -214,7 +239,7 @@ example (Output):
 Waiting on job_4f0c0878f6184119abfdae05f5194e65 ... (35s) Current status: DONE
 ```
 
-Run bq ls and babynames to confirm that the table now appears in your dataset:
+Run bq ls and naics_digit_2017_codes to confirm that the table now appears in your dataset:
 
 ```console
 bq ls naics_digit_2017_codes
@@ -226,6 +251,8 @@ Instead of ingesting and storing the CSV data table in Google BigQuery, you deci
 
 The process is essentially the same as before except for changing the Table Type
 
+Ouput:
+
 ```console
 ### Upload the dataset
 ```
@@ -234,8 +261,21 @@ Before you can build the table, you need to add the dataset to your project
 
 Copy and Paste the below GCS path:
 
+Run this command to add the dataset to your project:
+
+
+**external data configuration**
+
 ```console
-gs://data-insights-course/labs/lab5-ingesting-and-querying/irs990_code_lookup.csv
+wget https://github.com/nadinev6/cloudshell-commands-for-qwiklabs/Data-to-Insights_Ingesting-and-querying-new-datasets-v1.1/irs990_code_lookup.csv
+```
+
+or
+
+Copy from the cloned repository;
+
+```console
+gsutil -m cp -r irs990_code_lookup.csv gs://${bucket}
 ```
 
 ### Create table

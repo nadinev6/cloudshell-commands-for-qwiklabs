@@ -1,0 +1,66 @@
+irs_990_field,code,description
+irs990_field,code,description
+elf,P,Return filed on paper
+elf,E,Electronically-filed return
+eostatus,1,Unconditional exemption - active
+eostatus,12,Formal exemption not granted (Form 990-PF under IRC 4947(a)(1))
+miscrev11acd,USE NAICS LOOKUP,USE NAICS LOOKUP
+miscrev11acd,USE NAICS LOOKUP,USE NAICS LOOKUP
+miscrev11acd,USE NAICS LOOKUP,USE NAICS LOOKUP
+nonpfrea,0,Not reported
+nonpfrea,1,Church
+nonpfrea,2,School (described in 170(b)1)(A)(i))
+nonpfrea,3,Hospital organization (described in 170(b)1)(A)(i))
+nonpfrea,4,"Federal, state, or local government unit (described in 170(b)1)(A)(i))"
+nonpfrea,5,Medical research organization (described in 170(b)1)(A)(i))
+nonpfrea,6,Organization operated for the benefit of a public college or university (described in 170(b)1)(A)(i))
+nonpfrea,7,Organization that receives a substantial part of its support from government (described in 170(b)1)(A)(i))
+nonpfrea,8,Community trust (described in 170(b)1)(A)(i))
+nonpfrea,9,Section 509(a)(2) organization
+nonpfrea,11,Organization testing for public safety (described in section 509(a)(4))
+nonpfrea,12,Type I Section 509(a)(3) supporting organization
+nonpfrea,13,Type II Section 509(a)(3) supporting organization
+nonpfrea,14,Type III--Functionally integrated Section 509(a)(3) supporting organization
+nonpfrea,15,Type III--Other Section 509(a)(3) supporting organization
+operatingcd,Y,Operating Foundation
+operatingcd,N,Nonoperating Foundation
+prgmservcode2acd,USE NAICS LOOKUP,USE NAICS LOOKUP
+prgmservcode2bcd,USE NAICS LOOKUP,USE NAICS LOOKUP
+prgmservcode2ccd,USE NAICS LOOKUP,USE NAICS LOOKUP
+prgmservcode2dcd,USE NAICS LOOKUP,USE NAICS LOOKUP
+prgmservcode2ecd,USE NAICS LOOKUP,USE NAICS LOOKUP
+schedbind,Y,Schedule B provided by filer
+schedbind,N,Schedule B not provided by filer
+subcd,3,Charitable Corporation
+subcd,3,Educational Organization
+subcd,3,Literary Organization
+subcd,3,Organization to Prevent Cruelty to Animals
+subcd,3,Organization to Prevent Cruelty to Children
+subcd,3,Organization for Public Safety Testing
+subcd,3,Religious Organization
+subcd,3,Scientific Organization
+subcd,4,Social welfare organizations
+subcd,5,Labor and agriculture organizations
+subcd,6,Business leagues
+subcd,7,Social and recreation clubs
+subcd,8,Fraternal beneficiary societies
+subcd,9,Voluntary employees’ beneficiary associations
+subcd,10,Domestic fraternal beneficiary societies
+subcd,11,Teachers' retirement fund associations
+subcd,12,Benevolent life insurance associations
+subcd,13,Cemetery companies
+subcd,14,State-chartered credit unions
+subcd,15,Mutual insurance companies
+subcd,16,Corporations organized to finance crop operations
+subcd,17,Supplemental unemployment compensation trusts
+subcd,18,Employee-funded pension trusts
+subcd,19,Veterans’ organizations
+subcd,20,Group legal services plans
+subcd,21,Black lung benefit trusts
+subcd,22,Withdrawal liability payment funds
+subcd,23,Associations of past and present members of the armed services
+subcd,24,Trusts (described in section 4049 of ERIS74)
+subcd,25,Holding companies for pensions and other entities
+subcd,26,State-sponsored high-risk health insurance plans
+subcd,27,State-sponsored workers' compensation reinsurance plans
+subcd,92,Section 4947(a)(1) Nonexempt Charitable Trust (Treated as Private Foundation)
