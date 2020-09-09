@@ -95,7 +95,7 @@ $sAccounts=[Enter Compute Engine default service account here]
 In Cloud Shell session run the following command to use bash assistance:
 
 ```console
-git clone https://github.com/nadinev6/
+git clone https://github.com/nadinev6/cloudshell-commands-for-qwiklabs.git
 ```
 
 Change to the blogs directory:
@@ -268,12 +268,12 @@ us-west1
 us-west1-b
 **Machine type:**
 Custom
-**Cores:**
-6 vCPU
-**Memory:**
-32 GB
+**Cores:** (vCPU)
+6 
+**Memory:** (do not add unit GB)
+32
 
-Your output should look something like this:
+Your output should look like this:
 
 ```console
 gcloud beta compute —project=$projectID instances create $Name --zone=us-west1-b --machine-type=e2-custom-6-32768 --subnet=default --network-tier=PREMIUM --maintenance-policy=MIGRATE --service-account=118959651289-compute@developer.gserviceaccount.com --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append --image=debian-9-stretch-v20200805 --image-project=debian-cloud --boot-disk-size=10GB --boot-disk-type=pd-standard --boot-disk-device-name=custom-vm —reservation-affinity=any

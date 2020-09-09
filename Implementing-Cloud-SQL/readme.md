@@ -305,11 +305,11 @@ wordpress-us-private-ip  us-central1-a   n1-standard-1               10.128.0.2 
 3. Specify the following, replacing [ROOT_PASSWORD] with the password you configured upon machine creation, and leave the remaining settings as their defaults:
 
 
-Username:
+**Username:**
   root
-Password:
+**Password:**
  [ROOT-PASSWORD]
-Database Host
+**Database Host**
  127.0.0.1
 
 

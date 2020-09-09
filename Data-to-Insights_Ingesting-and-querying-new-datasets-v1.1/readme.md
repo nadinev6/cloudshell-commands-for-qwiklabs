@@ -77,7 +77,7 @@ gcloud projects list
 In Cloud Shell session run the following command to use bash assistance:
 
 ```console
-git clone https://github.com/nadinev6/
+git clone https://github.com/nadinev6/cloudshell-commands-for-qwiklabs.git
 ```
 
 Change to the blogs directory:
