@@ -6,6 +6,8 @@ Table of Contents
 * [Configure Authentication](#configure-authentication)
   * [Qwiklabs User](#qwiklabs-user)
   * [GCP Project ID](#gcp-project-id)
+  * [Service Account ID](#service-account-id)
+* [Clone this git-repository](#clone-this-git-repository)
 
 * [Create a virtual machine)](*create-a-virtual-machine)
   * [Create a VM](*create-a-vm)
@@ -58,13 +60,11 @@ Take note for confirm the GCP project ID assigned to you. From the cloud shell r
 ```console
 gcloud projects list
 ```
+You need the Project ID (without the email extension) to create virtual machines
 
+#### Service Account ID
 
-##	Create a virtual machine
-
-### Create a VM
-
-Run the following command to service accounts:
+Run the following command to list available service accounts:
 
 ```console
 cloud iam service-accounts list
@@ -83,9 +83,51 @@ Qwiklabs User Service Account           qwiklabs-gcp-01-aa61206acec7@qwiklabs-gc
   False
 ```
 
+Take note of the ‘Compute Engine default service account’ as you will need it throughout this lab
+
+Create a variable $sAccount for the service account required for using bash assistance:
+
 ```console
-Take note of the ‘Compute Engine default service account’ as you will need it throughout this lab.
+$sAccounts=[Enter Compute Engine default service account here]
 ```
+### Clone this git-repository
+
+In Cloud Shell session run the following command to use bash assistance:
+
+```console
+git clone https://github.com/nadinev6/
+```
+
+Change to the blogs directory:
+
+```console
+cd cloudshell-commands-for-qwiklabs/creating-virtual-machines
+```
+
+##	Create a virtual machine
+
+**For bash assistance run this code to specify the particulars of your VM while allowing the code to set the defaults:**
+
+```console
+zsh utility-vm.sh
+```
+
+### Create a VM
+
+Brief:
+
+**Name:**
+Type a name for your VM
+**Region:**
+us-central1
+**Zone:**
+us-central1-a
+**Machine type:** (1 vCPUs, 3.75 GB memory)
+n1-standard-1
+
+or,
+
+Copy the command and modify the variables according to the brief
 
 Output:
 
@@ -96,7 +138,7 @@ gcloud beta compute --project=qwiklabs-gcp-01-aa61206acec7 instances create vm-1
 ### Explore the VM details
 
 ```console
-gcloud compute instances describe [$NAME]
+gcloud compute instances describe [$Name]
 ```
 
 When prompted about a zone, type y only if the zone presents matches the zone you set, otherwise type n
@@ -122,20 +164,65 @@ gcloud compute instances list
 ```
 
 
-
 ## Create a Windows VM
 
+**For bash assistance run this code to specify the particulars of your VM while allowing the code to set the defaults:**
+
+```console
+zsh win-vm.sh
+```
+
 ### Create a VM
+
+Brief:
+
+**Name:**
+Type a name for your VM
+**Region:**
+europe-west2
+**Zone:**
+europe-west2-a
+**Machine type:** (2 vCPUs, 7.5 GB memory)
+n1-standard-2 
+**Boot disk (image):**
+debian-9-stretch-v20200805
+**Image Project:**
+debian-cloud
+**Boot disk type:**
+pd-standard
+**Size:** (make sure you type the unit: GB)
+100GB
+
+Your final output should look like this:
 
 ```console
 gcloud beta compute --project=qwiklabs-gcp-01-8c72720fba45 instances create win-vm --zone=europe-west2-a --machine-type=e2-small --subnet=default --network-tier=PREMIUM --maintenance-policy=MIGRATE --service-account=118959651289-compute@developer.gserviceaccount.com --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append --tags=http-server,https-server --image=windows-server-2016-dc-core-v20200813 --image-project=windows-cloud --boot-disk-size=100GB --boot-disk-type=pd-ssd --boot-disk-device-name=win-vm --no-shielded-secure-boot --shielded-vtpm --shielded-integrity-monitoring --reservation-affinity=any
 ```
 
+You need to add firewall rules separately:
+
+Use the bash file for assistance, run:
+
+```console
+zsh firewall-rule.sh
+```
+
+**Name:**
+default-allow-http
+**Target:**
+http-server
+
 ```console
 gcloud compute --project=qwiklabs-gcp-01-8c72720fba45 firewall-rules create default-allow-http --direction=INGRESS --priority=1000 --network=default --action=ALLOW --rules=tcp:80 --source-ranges=0.0.0.0/0 --target-tags=http-server
 ```
+**Name:**
+default-allow-https
+**Target:**
+https-server
 
+```console
 gcloud compute --project=qwiklabs-gcp-01-8c72720fba45 firewall-rules create default-allow-https --direction=INGRESS --priority=1000 --network=default --action=ALLOW --rules=tcp:443 --source-ranges=0.0.0.0/0 --target-tags=https-server
+```
 
 ```console
 ### Set the password for the VM
@@ -163,13 +250,33 @@ When prompted about a zone, type y only if the zone presents matches the zone yo
 
 
 
-
 ## Create a custom VM
+
+**For bash assistance run this code to specify the particulars of your VM while allowing the code to set the defaults:**
+
+```console
+zsh custom-vm.sh
+```
 
 ### Create a VM
 
+**Name:**
+Type a name for your VM
+**Region:**
+us-west1
+**Zone:**
+us-west1-b
+**Machine type:**
+Custom
+**Cores:**
+6 vCPU
+**Memory:**
+32 GB
+
+Your output should look something like this:
+
 ```console
-gcloud beta compute —project=[$PROJECT_ID] instances create custom-vm --zone=us-west1-b --machine-type=e2-custom-6-32768 --subnet=default --network-tier=PREMIUM --maintenance-policy=MIGRATE --service-account=118959651289-compute@developer.gserviceaccount.com --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append --image=debian-9-stretch-v20200805 --image-project=debian-cloud --boot-disk-size=10GB --boot-disk-type=pd-standard --boot-disk-device-name=custom-vm —reservation-affinity=any
+gcloud beta compute —project=$projectID instances create $Name --zone=us-west1-b --machine-type=e2-custom-6-32768 --subnet=default --network-tier=PREMIUM --maintenance-policy=MIGRATE --service-account=118959651289-compute@developer.gserviceaccount.com --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append --image=debian-9-stretch-v20200805 --image-project=debian-cloud --boot-disk-size=10GB --boot-disk-type=pd-standard --boot-disk-device-name=custom-vm —reservation-affinity=any
 ```
 
 

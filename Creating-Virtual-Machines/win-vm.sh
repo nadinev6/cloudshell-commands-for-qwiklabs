@@ -1,18 +1,18 @@
 #!/bin/bash
 # Enter Project ID:
-echo Name:
-read PROJECT-ID
-echo PROJECT-ID=$PROJECT-ID
+echo GCP Project ID:
+read projectID
+echo projectID=$projectID
 
-# Enter Service account ID:
-echo Address:
-read SERVICE-ACCOUNT
-echo SERVICE-ACCOUNT=$SERVICE-ACCOUNT
+# Enter Service Account ID:
+echo Service Account:
+read sAccount
+echo sAccount=$sAccount
 
 # Enter VM name:
 echo Name:
-read VM-NAME
-echo VM-NAME=$VM-NAME
+read Name
+echo Name=$Name
 
 # Enter Region:
 echo Region:
@@ -25,36 +25,29 @@ read ZONE
 echo ZONE=$ZONE
 
 # Enter Machine type:
-echo Machine type:
-read MACHINE TYPE
-echo MACHINE TYPE=$MACHINE TYPE
+echo Machine:
+read Machine 
+echo Machine=$Machine
 
-# Enter Machine type:
-echo Boot disk:
-read IMAGE
-echo IMAGE=$IMAGE
+# Enter Boot disk (image):
+echo image
+read image
+echo image=$image
 
-# Enter Operating System:
-echo Operating System:
-read IMAGE-PROJECT
-echo IMAGE-PROJECT=$IMAGE-PROJECT
-
-# Enter Boot disk size:
-echo Boot disk size:
-read BOOT-DISK-SIZE
-echo BOOT-DISK-SIZE=$BOOT-DISK-SIZE
+# Enter Image Project:
+echo project
+read project
+echo project=$project
 
 # Enter Boot disk type:
-echo Boot disk size:
-read BOOT-DISK-TYPE
-echo BOOT-DISK-TYPE=$BOOT-DISK-TYPE
+echo disk
+read disk 
+echo disk=$disk
 
-# Allow Firewall rules:
-echo Enter tags:
-read TAGS
-echo TAGES=$TAG1
+# Enter Boot disk size:
+echo size
+read size
+echo size=$size
 
-# Allow Firewall rules:
-echo Enter tags:
-read TAGS
-echo TAGES=$TAG2
+
+echo gcloud beta compute --project=$ProjectID instances create $Name --zone=$Zone --machine-type=$Machine --subnet=default --no-address --maintenance-policy=MIGRATE --service-account=$sAccount --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append --image=$image --image-project=debian-cloud --boot-disk-size=$size --boot-disk-type=$disk --boot-disk-device-name=vm-1 —reservation-affinity=any

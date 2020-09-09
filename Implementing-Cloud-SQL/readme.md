@@ -57,15 +57,15 @@ gcloud projects list
 Specify the following, and leave the remaining settings as their defaults:
 
 
-Instance ID:
+**Instance ID:**
    wordpress-db
-Root password:
+**Root password:**
    type a password
-Region:
+**Region:**
   us-central1
-Zone:
+**Zone:**
   do not specify*
-Database Version:
+**Database Version:**
   MySQL 5.7
 
 Note the root password; it will be used in a later step and referred to as [ROOT_PASSWORD].
