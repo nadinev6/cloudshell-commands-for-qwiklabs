@@ -5,6 +5,7 @@ This repository assists user to complete qwiklab assignments from the cloud shel
 There are additional bash files included in this repository, referred to in the instructions as **"bash assistance"** 
 
 **"bash assistance"** prompts the student to enter only the necessary details for a task, and completes the defaults for the student.
+I've included this for Introductory level labs and shorter duration labs (Creating virtual machines, Data to insights: ingesting and querying new datasets 1.1)
 
 The purpose of bash assistance to retain the diffulty level of the qwiklab, and 
 
