@@ -12,10 +12,10 @@ There are additional bash files included in this repository, referred to in the 
  
 The purpose of bash assistance to retain the diffulty level of the qwiklab, and to reduce time spent on a task.
 
-You should be able to complete the task in the same amount of time as he/she would using the web console. 
+You should be able to complete these Introductory level tasks in the same amount of time as he/she would using the web console: 
  
  * Creating virtual machines, 
-  * Data to insights: ingesting and querying new datasets 1.1
+ * Data to insights: ingesting and querying new datasets 1.1
 
-
+(bash assistance for other labs is still a working-in-progress)
 
